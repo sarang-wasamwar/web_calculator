@@ -115,7 +115,7 @@ function deleteLast() {
     return;
   }
   currentExpression = currentExpression.slice(0, -2);
-
+  upfateDisplay();
 }
 
 /* ------------------------------------------------------------------

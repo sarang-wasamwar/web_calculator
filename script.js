@@ -114,8 +114,8 @@ function deleteLast() {
     clearCalculator();
     return;
   }
-  currentExpression = currentExpression.slice(0, -2);
-  upfateDisplay();
+  currentExpression = currentExpression.slice(0, -1);
+  updateDisplay();
 }
 
 /* ------------------------------------------------------------------

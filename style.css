@@ -1,0 +1,290 @@
+/* ============================================================
+   style.css — Simple Calculator
+   Dark-theme, grid-based layout, fully responsive.
+   ============================================================ */
+
+/* ---------- Google Font Import ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Nunito:wght@400;600;700&display=swap');
+
+/* ---------- CSS Custom Properties (variables) ---------- */
+:root {
+  /* Background colours */
+  --color-page-bg: #0f1117;
+  --color-calc-bg: #1a1d27;
+  --color-display-bg: #12141e;
+
+  /* Button colours */
+  --color-btn-number: #252836;
+  --color-btn-number-hover: #2e3245;
+  --color-btn-operator: #2a2d42;
+  --color-btn-operator-hover: #363a55;
+  --color-btn-utility: #1e2130;
+  --color-btn-utility-hover: #272b3e;
+  --color-btn-equal: #4f6ef7;
+  --color-btn-equal-hover: #3a58e0;
+
+  /* Text colours */
+  --color-text-primary: #e8eaf6;
+  --color-text-secondary: #7b82a8;
+  --color-text-operator: #7c9ef5;
+  --color-text-utility: #f07070;
+  --color-text-equal: #ffffff;
+
+  /* Accent / glow */
+  --color-accent: #4f6ef7;
+  --color-error: #f07070;
+
+  /* Borders & shadows */
+  --color-border: #2a2d42;
+  --shadow-card: 0 24px 60px rgba(0, 0, 0, 0.55),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-btn: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-equal: 0 4px 18px rgba(79, 110, 247, 0.45);
+
+  /* Sizing */
+  --calc-width: 340px;
+  --border-radius-card: 20px;
+  --border-radius-btn: 12px;
+  --gap: 10px;
+}
+
+/* ---------- Reset / Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-page-bg);
+  /* Subtle dot-grid background for texture */
+  background-image: radial-gradient(circle,
+      rgba(79, 110, 247, 0.07) 1px,
+      transparent 1px);
+  background-size: 28px 28px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* ---------- Page Wrapper ---------- */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+  gap: 18px;
+}
+
+/* ---------- Page Title ---------- */
+.page-title {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  text-shadow: 0 0 18px rgba(79, 110, 247, 0.35);
+  text-align: center;
+}
+
+/* ---------- Calculator Card ---------- */
+.calculator {
+  background-color: var(--color-calc-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+  width: var(--calc-width);
+  max-width: 100%;
+}
+
+/* ---------- Display ---------- */
+.display {
+  background-color: var(--color-display-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 16px 18px 14px;
+  margin-bottom: 16px;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+/* Small secondary line — shows the live expression */
+.display-expression {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.75rem;
+  color: var(--color-text-primary);
+  width: 100%;
+  text-align: right;
+  /* Shrink text automatically when the number is very long */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  transition: color 0.2s ease;
+  letter-spacing: 0.5px;
+}
+
+/* Smaller hint-line that shows the evaluated result before = is pressed */
+.display-result {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  width: 100%;
+  text-align: right;
+  min-height: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: color 0.2s ease;
+}
+
+/* Error state — turns the expression text red */
+.display-expression.error {
+  color: var(--color-error);
+  font-size: 1.3rem;
+}
+
+/* ---------- Button Grid ---------- */
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: var(--gap);
+}
+
+/* ---------- Base Button ---------- */
+.btn {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  height: 62px;
+  border: none;
+  border-radius: var(--border-radius-btn);
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  /* Smooth colour + scale transitions */
+  transition:
+    background-color 0s ease,
+    transform 0s ease,
+    box-shadow 0s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  /* removes blue flash on mobile tap */
+  user-select: none;
+}
+
+/* Press animation */
+.btn:active {
+  transform: scale(0.94);
+  box-shadow: none;
+}
+
+/* Focus ring for keyboard accessibility */
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Number Buttons ---------- */
+.btn-number {
+  background-color: var(--color-btn-number);
+  color: var(--color-text-primary);
+}
+
+.btn-number:hover {
+  background-color: var(--color-btn-number-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- Operator Buttons ---------- */
+.btn-operator {
+  background-color: var(--color-btn-operator);
+  color: var(--color-text-operator);
+  font-size: 1.25rem;
+}
+
+.btn-operator:hover {
+  background-color: var(--color-btn-operator-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(79, 110, 247, 0.25);
+}
+
+/* ---------- Utility Buttons (C & DEL) ---------- */
+.btn-utility {
+  background-color: var(--color-btn-utility);
+  color: var(--color-text-utility);
+  letter-spacing: 0.5px;
+}
+
+.btn-utility:hover {
+  background-color: var(--color-btn-utility-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(240, 112, 112, 0.2);
+}
+
+/* ---------- Equal Button ---------- */
+.btn-equal {
+  background: linear-gradient(135deg, #5b7bff 0%, #3a58e0 100%);
+  color: var(--color-text-equal);
+  font-size: 1.4rem;
+  box-shadow: var(--shadow-equal);
+}
+
+.btn-equals:hover {
+  background: linear-gradient(135deg, #6e8bff 0%, #4a68f0 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(79, 110, 247, 0.55);
+}
+
+/* ---------- Grid Span Helpers ---------- */
+
+/* Equal button spans 2 rows (column 4, rows 4–5) */
+.span-rows {
+  grid-row: span 2;
+}
+
+/* Zero button spans 2 columns (columns 1–2, row 5) */
+.span-cols {
+  grid-column: span 2;
+}
+
+/* ---------- Keyboard "active" flash class ---------- */
+/* Added via JS when a keyboard key is pressed */
+.btn-active {
+  transform: scale(0.94) !important;
+  filter: brightness(1.25);
+}
+
+/* ---------- Responsive: small phones ---------- */
+@media (max-width: 380px) {
+  :root {
+    --calc-width: 100%;
+    --gap: 8px;
+  }
+
+  .calculator {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .btn {
+    height: 54px;
+    font-size: 1rem;
+  }
+
+  .display-expression {
+    font-size: 1.5rem;
+  }
+}

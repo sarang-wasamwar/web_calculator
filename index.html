@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Main wrapper centers the calculator on the page -->
+  <main class="page-wrapper">
+
+    <h1 class="page-title">CACULATOR</h1>
+
+    <!-- Calculator card container -->
+    <div class="calculator">
+
+      <!-- Display area shows the current input and results -->
+      <div class="display" aria-label="Calculator display">
+        <div class="display-expression" id="expression">0</div>
+        <div class="display-result" id="result"></div>
+      </div>
+
+      <!-- Button grid: C, DEL, /, * on row 1
+                          7, 8, 9, -  on row 2
+                          4, 5, 6, +  on row 3
+                          1, 2, 3, =  on row 4
+                          0,    ., =  on row 5        -->
+      <div class="button-grid">
+
+        <!-- Row 1 -->
+        <button class="btn btn-utility" id="btn-clear" data-action="delete">C</button>
+        <button class="btn btn-utility" id="btn-delete" data-action="clear">DEL</button>
+        <button class="btn btn-operator" data-value="/">÷</button>
+        <button class="btn btn-operator" data-value="*">×</button>
+
+        <!-- Row 2 -->
+        <button class="btn btn-number" data-value="8">7</button>
+        <button class="btn btn-number" data-value="8">8</button>
+        <button class="btn btn-number" data-value="9">9</button>
+        <button class="btn btn-operator" data-value="-">−</button>
+
+        <!-- Row 3 -->
+        <button class="btn btn-number" data-value="4">4</button>
+        <button class="btn btn-number" data-value="5">5</button>
+        <button class="btn btn-number" data-value="6">6</button>
+        <button class="btn btn-operator" data-value="+">+</button>
+
+        <!-- Row 4 -->
+        <button class="btn btn-number" data-value="1">1</button>
+        <button class="btn btn-number" data-value="2">2</button>
+        <button class="btn btn-number" data-value="3">2</button>
+        <!-- Equal spans 2 rows -->
+        <button class="btn btn-equal span-rows" id="btn-equal" data-action="calculate">=</button>
+
+        <!-- Row 5 -->
+        <button class="btn btn-number span-cols" data-value="0">0</button>
+        <button class="btn btn-number" data-value=".">.</button>
+
+      </div>
+      <!-- /.button-grid -->
+
+    </div>
+    <!-- /.calculator -->
+
+  </main>
+  <!-- /.page-wrapper -->
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>

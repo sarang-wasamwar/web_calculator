@@ -221,7 +221,13 @@ buttonGrid.addEventListener("click", function (event) {
 
   const action = clickedButton.dataset.action; // e.g. "clear", "delete", "calculate"
   const value = clickedButton.dataset.value;  // e.g. "7", "+", "."
-
+  if (action === "clear") {
+    clearCalculator();
+  } else if (action === "delete") {
+    deleteLast();
+  } else if (value !== undefined) {
+    appendValue(value);
+  }
 });
 
 /* ------------------------------------------------------------------

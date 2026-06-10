@@ -127,12 +127,14 @@ body {
   width: 100%;
   text-align: right;
   /* Shrink text automatically when the number is very long */
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   word-break: break-all;
   transition: color 0.2s ease;
   letter-spacing: 0.5px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  text-overflow: clip;
+  scrollbar-width: thin;
 }
 
 /* Smaller hint-line that shows the evaluated result before = is pressed */
@@ -143,11 +145,13 @@ body {
   width: 100%;
   text-align: right;
   min-height: 18px;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
+  text-overflow: clip;
   transition: color 0.2s ease;
 }
+
 
 /* Error state — turns the expression text red */
 .display-expression.error {

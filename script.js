@@ -202,8 +202,12 @@ function safeEvaluate(expression) {
    Example: 3.50000 → "3.5", 100.0 → "100"
 ------------------------------------------------------------------ */
 function formatNumber(num) {
-  // parseFloat removes trailing zeros; 
-  return parseFloat(num);
+  // parseFloat removes trailing zeros;
+  const parsed = parseFloat(num) ;
+  if (isNaN(parsed)) {
+    return "0" 
+  } 
+  return parsed.toString();
 
 }
 

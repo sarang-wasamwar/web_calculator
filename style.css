@@ -175,9 +175,9 @@ body {
   box-shadow: var(--shadow-btn);
   /* Smooth colour + scale transitions */
   transition:
-    background-color 0s ease,
-    transform 0s ease,
-    box-shadow 0s ease;
+    background-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   outline: none;
   -webkit-tap-highlight-color: transparent;
   /* removes blue flash on mobile tap */
@@ -242,7 +242,7 @@ body {
   box-shadow: var(--shadow-equal);
 }
 
-.btn-equals:hover {
+.btn-equal:hover {
   background: linear-gradient(135deg, #6e8bff 0%, #4a68f0 100%);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(79, 110, 247, 0.55);

@@ -188,6 +188,12 @@ body {
   user-select: none;
 }
 
+/* Hover effect for all base butthons */
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+}
+
 /* Press animation */
 .btn:active {
   transform: scale(0.94);
